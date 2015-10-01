@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Doctor9";
+    Layout = "";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/Content/3.3.4/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/3.3.4/style.min.css" rel="stylesheet">
+    <link href="~/Content/3.3.4/docs.css" rel="stylesheet">
+    <link href="~/Content/3.3.4/bootstrap-select.css" rel="stylesheet">
+    <link href="~/Content/3.3.4/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/grayscale.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/3.3.4/calendario.css">
+</head>
+
+<body>
+    
+        <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation" id="navnav">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div>
+                        <img src="~/Content/img/logoazul.png" class="logo" id="logoazul">
+                        <img src="~/Content/img/logobranco.png" class="logo" id="logobranco">
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li><a href="#quemsomos">Quem somos</a></li>
+                        <li>@Html.ActionLink("Contato", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Localização", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
+                        @Html.Partial("_LoginPartial")
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <div class="container">
+            <div class="row" style="margin-top:10%;">
+                <div class="col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="calendario"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <script src="/Content/3.3.4/js/jquery.min.js"></script>
+    <script src="/Content/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/Content/3.3.4/js/bootstrap-select.min.js"></script>
+    <script src="/Content/3.3.4/js/calendario-plugins.js"></script>
+    <script src="/Content/3.3.4/js/calendario.js"></script>
+    <script src="/Content/3.3.4/js/calendario-pt-br.js"></script>
+    <script>$('#logoazul').hide();</script>
+    <script>$(function () { Calendario.init(); });</script>
+
+</body>

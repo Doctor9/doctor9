@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!--Menu topo-->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" id="navnav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                 @*Html.ActionLink("Doctor9", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a href="http://localhost:50426/">
+                    <div>
+                        <img src="~/Content/img/logoazul.png" class="logo" id="logoazul">
+                        <img src="~/Content/img/logobranco.png" class="logo" id="logobranco">
+                    </div>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <!--<li>@Html.ActionLink("Quem somos", "Index", "Home")</li>-->
+                    <li><a href="#quemsomos" class="page-scroll">Quem somos</a></li>
+                    <!--<li class="nav-item dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#" aria-expanded="false">Doutores <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Área1", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Área2", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Área3", "Index", "Home")</li>
+                        </ul>
+                    </li>-->
+                    <li><a href="#contato" class="page-scroll">Contato</a></li>
+                    <li>@Html.ActionLink("Localização", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
+                    @Html.Partial("_LoginPartial")
+                    
+                    <!--<li><a class="page-scroll" href="#download">Download</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--Montar Conteúdo-->
+    @RenderBody()
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 30) {
+                $('#logobranco').show();
+                $('#logoazul').hide();
+            } else {
+                $('#logobranco').hide();
+                $('#logoazul').show();
+            }
+        });
+    </script>
+
+
+</body>
+</html>
