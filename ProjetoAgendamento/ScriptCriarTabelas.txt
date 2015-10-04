@@ -1,0 +1,69 @@
+﻿/*
+create database Doctor9
+
+-------------------------------------------------
+
+USE [Doctor9]
+GO
+
+CREATE TABLE [dbo].[Consulta](
+	[idConsulta] [int] NOT NULL,
+	[idPaciente] [int] NOT NULL,
+	[idMedico] [int] NOT NULL,
+	[dataAgendamento] [date] NOT NULL,
+	[dataConsulta] [date] NOT NULL,
+	[horarioConsulta] [varchar](5) NOT NULL,
+	[observacao] [varchar](500) NULL
+) 
+
+-------------------------------------------------
+
+USE [Doctor9]
+GO
+
+CREATE TABLE [dbo].[Especialidade](
+	[idEspecialidade] [int] NULL,
+	[NomeEspecialidade] [varchar](300) NULL,
+	[Descricao] [varchar](500) NULL
+) 
+
+-------------------------------------------------
+
+USE [Doctor9]
+GO
+
+CREATE TABLE [dbo].[Medico](
+	[idMedico] [int] NULL,
+	[Nome] [varchar](300) NULL,
+	[idEspecialidade] [int] NULL
+) 
+
+-------------------------------------------------
+
+USE [Doctor9]
+GO
+
+CREATE TABLE [dbo].[Paciente](
+	[idPaciente] [int] NOT NULL,
+	[Nome] [varchar](300) NOT NULL,
+	[CPF] [varchar](20) NULL,
+	[RG] [varchar](20) NULL,
+	[Complemento] [varchar](100) NOT NULL,
+	[Numero] [int] NOT NULL,
+	[Cidade] [varchar](100) NOT NULL,
+	[Estado] [varchar](100) NOT NULL
+) 
+
+-------------------------------------------------
+
+USE [Doctor9]
+GO
+
+CREATE TABLE [dbo].[Usuari2222o](
+	[idPaciente] [int] NOT NULL,
+	[Login] [varchar](20) NOT NULL,
+	[Senha] [varchar](20) NOT NULL,
+	[CodVinculo] [int] NOT NULL
+) 
+
+*/

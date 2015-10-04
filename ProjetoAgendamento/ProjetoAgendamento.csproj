@@ -175,8 +175,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Consulta.cs" />
+    <Compile Include="Models\Medico.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Especialidade.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -261,6 +264,7 @@
     <Content Include="Content\font-awesome\fscss\_stacked.scss" />
     <Content Include="Content\font-awesome\fscss\_variables.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="ScriptCriarTabelas.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
