@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ProjetoAgendamento.Controllers
 {
+    [Authorize]
     public class AgendamentoController : Controller
     {
         public ActionResult Index()

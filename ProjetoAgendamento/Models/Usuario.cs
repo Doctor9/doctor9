@@ -14,5 +14,7 @@ namespace ProjetoAgendamento.Models
         public string Login { get; set; }
         public string Senha { get; set; }
         public int CodVinculo { get; set; }
+        public string Nome { get; set; }
+        public string Apelido { get; set; }
     }
 }
