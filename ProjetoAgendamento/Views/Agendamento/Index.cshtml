@@ -27,7 +27,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <div>
-                        <img src="~/Content/img/logoazul.png" class="logo" id="logoazul">
                         <img src="~/Content/img/logobranco.png" class="logo" id="logobranco">
                     </div>
                 </div>
@@ -48,25 +47,96 @@
     
         <div class="container">
             <div class="row" style="margin-top:10%;">
+                
                 <div class="col-md-6 col-md-offset-3">
                     <label for="espec">Especialidade</label>
                     <select class="form-control" id="espec">
                         <option value="">Selecione</option>
-                        <option value="idespec1">Especialidade1</option>
-                        <option value="idespec2">Especialidade2</option>
-                        <option value="idespec3">Especialidade3</option>
+                        <option value="espec1">espec1</option>
+                        <option value="espec2">espec2</option>
+                        <option value="espec3">espec3</option>
                     </select>
                 </div>
                 <div class="col-md-6 col-md-offset-3" style="margin-top:2%;">
                     <label for="medic">Médico</label>
                     <select class="form-control" id="medic">
                         <option value="">Selecione</option>
-                        <option value="idmedic1">Medico1</option>
-                        <option value="idmedic2">Medico2</option>
-                        <option value="idmedic3">Medico3</option>
+                        <option value="Medico1" rel-idespec="1">Medico1</option>
+                        <option value="Medico2" rel-idespec="1">Medico2</option>
+                        <option value="Medico3" rel-idespec="2">Medico3</option>
                     </select>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-7">
+                        <input type="submit" value="Consultar" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="modal-title">Agendar horário</h5>
+                            </div>
+                            @using (Html.BeginForm("AgendamentoConsulta", "Agendamento", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "dadosAgendamento" }))
+                            {
+                                <div class="modal-body">
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="HjAgenda">Hoje</label>
+                                                    <input type="text" class="form-control text" id="HjAgenda" name="HjAgenda" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="diaAgenda">Data Agendamento</label>
+                                                    <input type="text" class="form-control text" id="diaAgenda" name="diaAgenda" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="hrAgenda">Hora Agendamento</label>
+                                                    <input type="text" class="form-control text" id="hrAgenda" name="hrAgenda" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="idEspecAgenda">Especialidade</label>
+                                                    <input type="text" class="form-control text" id="idEspecAgenda" name="idEspecAgenda" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="idMedicAgenda">Médico</label>
+                                                    <input type="text" class="form-control text" id="idMedicAgenda" name="idMedicAgenda" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-md-offset-5">
+                                                <button type="submit" value="Entrar" class="btn btn-success">Salvar Agendamento</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                </div>
+                            
+                        </div>
+
+                    </div>
+                </div>               
+                                
                 <div class="col-md-12 col-lg-12" style="margin-top:2%;">
+                <input type="hidden" name="codTela" id="codTela" value="@ViewBag.agenda" />
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="tab-content">
@@ -84,7 +154,6 @@
     <script src="/Content/3.3.4/js/calendario-plugins.js"></script>
     <script src="/Content/3.3.4/js/calendario.js"></script>
     <script src="/Content/3.3.4/js/calendario-pt-br.js"></script>
-    <script>$('#logoazul').hide();</script>
     <script>$(function () { Calendario.init(); });</script>
 
 </body>

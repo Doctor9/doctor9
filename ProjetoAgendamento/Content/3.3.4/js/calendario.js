@@ -60,6 +60,53 @@
                     $(calendario).fullCalendar('changeView', 'agendaDay');
                     $(calendario).fullCalendar('gotoDate', date);
                 }
+                else if (view.name == 'agendaDay') {
+                    //alert(date);
+                    var txt = date;
+                    var newDt = new Date();
+
+                    var re1 = '.*?';
+                    var re2 = '(?:[a-z][a-z0-9_]*)';
+                    var re3 = '.*?';
+                    var re4 = '((?:[a-z][a-z0-9_]*))';
+                    var re5 = '.*?';
+                    var re6 = '((?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d])';
+                    var re7 = '.*?';
+                    var re8 = '((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d])';
+                    var re9 = '.*?';
+                    var re10 = '((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)';
+
+                    var p = new RegExp(re1 + re2 + re3 + re4 + re5 + re6 + re7 + re8 + re9 + re10, ["i"]);
+                    var m = p.exec(txt);
+                    if (m != null) {
+                        var mon1 = m[1];
+                        var day1 = m[2];
+                        var year1 = m[3];
+                        var time1 = m[4];
+                        var dia = m[2] + " " + m[1] + " " + m[3];
+                    }
+
+                    var dt2 = p.exec(newDt);
+                    if (dt2 != null) {
+                        var dt2n = dt2[2] + " " + dt2[1] + " " + dt2[3];
+                    }
+                    
+                    $('#myModal').modal('show');
+                    
+                    var especialidade = $('#espec option:selected').text();
+                    var medico = $('#medic option:selected').text();
+                    
+                    var valorProInput = {
+                        'diaAgenda': dia,
+                        'hrAgenda': time1,
+                        'idEspecAgenda': especialidade,
+                        'idMedicAgenda': medico,
+                        'HjAgenda': dt2n
+                    };
+                    $('#dadosAgendamento').find('input').val(function (index, value) {
+                        return valorProInput[this.id];
+                    });
+                }
             }
         });
     };

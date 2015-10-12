@@ -2028,7 +2028,9 @@
     function ve(e, n) {
         function i() {
             var e = n.header;
-            return f = n.theme ? "ui" : "fc", e ? g = t("<div class='fc-toolbar'/>").append(s("left")).append(s("right")).append("<div class='fc-center'><button type='button' class='btn btn-primary' onclick='Calendario.novo()'>Agendar horário</button></div>").append('<div class="fc-clear"/>') : void 0
+            return f = n.theme ? "ui" : "fc", e ? g = t("<div class='fc-toolbar'/>").append(s("left")).append(s("right"))
+                //.append("<div class='fc-center'><button type='button' class='btn btn-primary' onclick='Calendario.novo()'>Agendar horário</button></div>")
+                .append('<div class="fc-clear"/>') : void 0
         }
 
         function r() {
