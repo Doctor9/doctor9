@@ -13,5 +13,8 @@ namespace ProjetoAgendamento.Models
         public int IdMedico { get; set; }
         public string Nome { get; set; }
         public int idEspecialidade { get; set; }
+
+        public virtual Especialidade Especialidade { get; set; }
+        public virtual ICollection<Medico> Medicos { get; set; }
     }
 }

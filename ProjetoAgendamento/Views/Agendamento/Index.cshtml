@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ProjetoAgendamento.Controllers.AgendamentoController
+@{
     ViewBag.Title = "Doctor9";
     Layout = "";
 }
@@ -16,6 +17,12 @@
     <link href="~/Content/grayscale.css" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/Content/3.3.4/calendario.css">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -50,25 +57,22 @@
                 
                 <div class="col-md-6 col-md-offset-3">
                     <label for="espec">Especialidade</label>
-                    <select class="form-control" id="espec">
-                        <option value="">Selecione</option>
-                        <option value="espec1">espec1</option>
-                        <option value="espec2">espec2</option>
-                        <option value="espec3">espec3</option>
-                    </select>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.DropDownList("idEspecialidade", ViewBag.idEspecialidade as SelectList, "Selecione uma especialidade", new { id = "espec", @class = "form-control" })
+                    }
                 </div>
+
                 <div class="col-md-6 col-md-offset-3" style="margin-top:2%;">
                     <label for="medic">Médico</label>
-                    <select class="form-control" id="medic">
-                        <option value="">Selecione</option>
-                        <option value="Medico1" rel-idespec="1">Medico1</option>
-                        <option value="Medico2" rel-idespec="1">Medico2</option>
-                        <option value="Medico3" rel-idespec="2">Medico3</option>
-                    </select>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.DropDownList("idMedico", ViewBag.idMedico as SelectList, "Selecione um médico", new { id = "medic", @class = "form-control" })
+                    }
                 </div>
-                <div class="row">
+                <div class="row" id="BuscaAgenda">
                     <div class="col-md-12 col-md-offset-7">
-                        <input type="submit" value="Consultar" class="btn btn-default" />
+                        <input type="submit" value="Consultar" class="btn btn-default" onclick="Calendario.init();" />
                     </div>
                 </div>
 
@@ -136,7 +140,6 @@
                 </div>               
                                 
                 <div class="col-md-12 col-lg-12" style="margin-top:2%;">
-                <input type="hidden" name="codTela" id="codTela" value="@ViewBag.agenda" />
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="tab-content">
@@ -154,6 +157,19 @@
     <script src="/Content/3.3.4/js/calendario-plugins.js"></script>
     <script src="/Content/3.3.4/js/calendario.js"></script>
     <script src="/Content/3.3.4/js/calendario-pt-br.js"></script>
-    <script>$(function () { Calendario.init(); });</script>
+    <!--<script>$(function () { Calendario.init(); });</script>-->
+    <script>
+        $(function () {
+            $('#espec').change(function () {
+                $.getJSON('/Agendamento/ListaMedico/' + $('#espec').val(), function (data) {
+                    var items = '';
+                    $.each(data, function (i, state) {
+                        items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                    });
+                    $('#medic').html(items);
+                });
+            });
+        });
+    </script>
 
 </body>
