@@ -72,7 +72,7 @@
                 </div>
                 <div class="row" id="BuscaAgenda">
                     <div class="col-md-12 col-md-offset-7">
-                        <input type="submit" value="Consultar" class="btn btn-default" onclick="Calendario.init();" />
+                        <input type="submit" value="Consultar" class="btn btn-default" onclick="$('#divCalendario').show(); Calendario.init();" />
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@
                     </div>
                 </div>               
                                 
-                <div class="col-md-12 col-lg-12" style="margin-top:2%;">
+                <div class="col-md-12 col-lg-12" style="margin-top:2%;" id="divCalendario">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="tab-content">
@@ -159,6 +159,8 @@
     <script src="/Content/3.3.4/js/calendario-pt-br.js"></script>
     <!--<script>$(function () { Calendario.init(); });</script>-->
     <script>
+        $('#divCalendario').hide();
+
         $(function () {
             $('#espec').change(function () {
                 $.getJSON('/Agendamento/ListaMedico/' + $('#espec').val(), function (data) {

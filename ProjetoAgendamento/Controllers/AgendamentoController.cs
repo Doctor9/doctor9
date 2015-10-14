@@ -63,9 +63,6 @@ namespace ProjetoAgendamento.Controllers
                        where u.Nome == descMedico
                        select u.IdMedico).FirstOrDefault();
 
-            //Consultar Agenda, soma de idEspec + idMedic
-            //ViewBag.Agenda = idEspec + idMedic;
-
             if (dataAgendamento != null)
             {
                 
