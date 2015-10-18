@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,21 +34,26 @@
                     <li>@Html.ActionLink("Localização", "Index", "Home")</li>
                     @{ if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                    <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
-                            } }
+                            <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
+                        } }
 
-                        @Html.Partial("_LoginPartial")
+                    @Html.Partial("_LoginPartial")
 
-                    <!--<li><a class="page-scroll" href="#download">Download</a></li>-->
                 </ul>
             </div>
         </div>
+
     </nav>
+
+@if (Request.IsAuthenticated)
+{
+    <div class="col-md-3 col-md-offset-9" style="height:0px;">
+        <p class="saudacao">Olá @User.Identity.GetUserName()</p>
+    </div>
+}
 
     <!--Montar Conteúdo-->
     @RenderBody()
-
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

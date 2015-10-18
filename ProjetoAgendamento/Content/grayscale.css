@@ -396,3 +396,10 @@ body {
 .fa:hover {
     color: #fff;
 }
+
+.saudacao {
+    background-color:#337ab7; 
+    border-radius:6px; 
+    padding-left:5px; 
+    margin-top:2px;
+}
