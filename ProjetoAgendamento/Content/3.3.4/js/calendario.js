@@ -62,6 +62,7 @@
                 }
                 else if (view.name == 'agendaDay') {
                     //alert(date);
+
                     var txt = date;
                     var newDt = new Date();
 
@@ -83,14 +84,113 @@
                         var day1 = m[2];
                         var year1 = m[3];
                         var time1 = m[4];
-                        var dia = m[2] + " " + m[1] + " " + m[3];
+
+                        switch (mon1) {
+                            case 'Jan':
+                                mon1 = "01";
+                                break;
+                            case 'Fev':
+                                mon1 = "02";
+                                break;
+                            case 'Mar':
+                                mon1 = "03";
+                                break;
+                            case 'Abr':
+                                mon1 = "04";
+                                break;
+                            case 'Mai':
+                                mon1 = "05";
+                                break;
+                            case 'Jun':
+                                mon1 = "06";
+                                break;
+                            case 'Jul':
+                                mon1 = "07";
+                                break;
+                            case 'Ago':
+                                mon1 = "08";
+                                break;
+                            case 'Set':
+                                mon1 = "09";
+                                break;
+                            case 'Out':
+                                mon1 = "10";
+                                break;
+                            case 'Nov':
+                                mon1 = "11";
+                                break;
+                            case 'Dez':
+                                mon1 = "12";
+                                break;
+                        }
+
+                        var dia = m[2] + "/" + mon1 + "/" + m[3];
                     }
 
                     var dt2 = p.exec(newDt);
                     if (dt2 != null) {
-                        var dt2n = dt2[2] + " " + dt2[1] + " " + dt2[3];
+
+                        var mes2 = dt2[1];
+
+                        switch (mes2) {
+                            case 'Jan':
+                                mes2 = "01";
+                                break;
+                            case 'Feb':
+                                mes2 = "02";
+                                break;
+                            case 'Mar':
+                                mes2 = "03";
+                                break;
+                            case 'Apr':
+                                mes2 = "04";
+                                break;
+                            case 'May':
+                                mes2 = "05";
+                                break;
+                            case 'Jun':
+                                mes2 = "06";
+                                break;
+                            case 'Jul':
+                                mes2 = "07";
+                                break;
+                            case 'Aug':
+                                mes2 = "08";
+                                break;
+                            case 'Sep':
+                                mes2 = "09";
+                                break;
+                            case 'Oct':
+                                mes2 = "10";
+                                break;
+                            case 'Nov':
+                                mes2 = "11";
+                                break;
+                            case 'Dec':
+                                mes2 = "12";
+                                break;
+                        }
+
+                        var dt2n = dt2[2] + "/" + mes2 + "/" + dt2[3];
                     }
                     
+                    
+                    var hojee = dt2n.split('/');
+                    var dhojee = parseInt(hojee[0], 10);
+                    var mhojee = parseInt(hojee[1], 10);
+                    var yhojee = parseInt(hojee[2], 10);
+                    var diaAgend = dia.split('/');
+                    var ddiaAgend = parseInt(diaAgend[0], 10);
+                    var mdiaAgend = parseInt(diaAgend[1], 10);
+                    var ydiaAgend = parseInt(diaAgend[2], 10);
+
+                    if (dhojee < ddiaAgend && mdiaAgend >= mhojee && ydiaAgend >= yhojee) {
+                        //alert('ok');
+                    } else {
+                        alert('Data para agendamento inválida!');
+                        return false;
+                    }
+
                     $('#myModal').modal('show');
                     
                     var especialidade = $('#espec option:selected').text();
