@@ -59,7 +59,7 @@
                     <label for="espec">Especialidade</label>
                     @using (Html.BeginForm())
                     {
-                        @Html.DropDownList("idEspecialidade", ViewBag.idEspecialidade as SelectList, "Selecione uma especialidade", new { id = "espec", @class = "form-control" })
+                        @Html.DropDownList("idEspecialidade", ViewBag.idEspecialidade as SelectList, "Selecione uma especialidade", new { id = "espec", @class = "form-control", @onchange = "if ($(this).val() == '') {$('#BuscaAgenda').hide();}" })
                     }
                 </div>
 
@@ -67,14 +67,16 @@
                     <label for="medic">Médico</label>
                     @using (Html.BeginForm())
                     {
-                        @Html.DropDownList("idMedico", ViewBag.idMedico as SelectList, "Selecione um médico", new { id = "medic", @class = "form-control" })
+                        @Html.DropDownList("idMedico", ViewBag.idMedico as SelectList, "Selecione um médico", new { id = "medic", @class = "form-control", @onchange = "if ($(this).val() != '0') {$('#BuscaAgenda').show();} else {$('#BuscaAgenda').hide();}" })
                     }
                 </div>
-                <div class="row" id="BuscaAgenda">
+                
+                <div class="row" id="BuscaAgenda" style="display:none;">
                     <div class="col-md-12 col-md-offset-7">
                         <input type="submit" value="Consultar" class="btn btn-default" onclick="$('#divCalendario').show(); Calendario.init();" />
                     </div>
                 </div>
+                
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" role="dialog">
@@ -165,6 +167,7 @@
             $('#espec').change(function () {
                 $.getJSON('/Agendamento/ListaMedico/' + $('#espec').val(), function (data) {
                     var items = '';
+                    items += "<option value='0'>Selecione um médico</option>";
                     $.each(data, function (i, state) {
                         items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
                     });
