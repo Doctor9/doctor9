@@ -15,7 +15,7 @@ namespace ProjetoAgendamento.Controllers
         public ActionResult Index()
         {
             ViewBag.idEspecialidade = new SelectList(db.Especialidades, "idEspecialidade", "NomeEspecialidade");
-            ViewBag.idMedico = new SelectList(db.Medicos, "idMedico", "Nome");
+            ViewBag.idMedico = new SelectList(db.Medicos, "idMedico", "ConcatenarCRM");
             return View();
         }
 
@@ -24,7 +24,7 @@ namespace ProjetoAgendamento.Controllers
             var state = from s in db.Medicos
                         where s.idEspecialidade == Id
                         select s;
-            return Json(new SelectList(state.ToArray(), "idMedico", "Nome"), JsonRequestBehavior.AllowGet);
+            return Json(new SelectList(state.ToArray(), "idMedico", "ConcatenarCRM"), JsonRequestBehavior.AllowGet);
         }
 
         public IList<Medico> Getespec(int IdEspecialidade)
@@ -67,7 +67,7 @@ namespace ProjetoAgendamento.Controllers
             {
                 
             var ctx2 = new ApplicationDbContext();
-            var cons = new Consulta() { idPaciente = 1, idEspecialidade = idEspec, idMedico = idMedic, dataAgendamento = "datahoje", dataConsulta = dataAgendamento, horarioConsulta = horaAgendamento};
+            var cons = new Consulta() { idPaciente = 1, idEspecialidade = idEspec, idMedico = idMedic, dataAgendamento = DateTime.Now.ToString("dd/MM/yyyy"), dataConsulta = dataAgendamento, horarioConsulta = horaAgendamento};
                 ctx2.Consultas.Add(cons);
                 ctx2.SaveChanges();
             }

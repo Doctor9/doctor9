@@ -13,6 +13,15 @@ namespace ProjetoAgendamento.Models
         public int IdMedico { get; set; }
         public string Nome { get; set; }
         public int idEspecialidade { get; set; }
+        public int CRM { get; set; }
+
+        public string ConcatenarCRM
+        {
+            get
+            {
+                return string.Format("{0} - {1}", CRM, Nome);
+            }
+        }
 
         public virtual Especialidade Especialidade { get; set; }
         public virtual ICollection<Medico> Medicos { get; set; }
