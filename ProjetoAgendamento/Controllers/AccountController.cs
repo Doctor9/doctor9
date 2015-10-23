@@ -42,6 +42,7 @@ namespace ProjetoAgendamento.Controllers
                 else {
                     saudacao = usu.Apelido;
                 }
+                Session["UsuarioLogado"] = usu.IdPaciente;
                 FormsAuthentication.SetAuthCookie(saudacao, false);
                 return RedirectToAction("Index", "");
             }

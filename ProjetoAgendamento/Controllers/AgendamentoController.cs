@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetoAgendamento.Models;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace ProjetoAgendamento.Controllers
 {
@@ -53,21 +54,23 @@ namespace ProjetoAgendamento.Controllers
             var horaAgendamento = Request.Form["hrAgenda"];
             var descEspecialidade = Request.Form["idEspecAgenda"];
             var descMedico = Request.Form["idMedicAgenda"];
-
+            var CRM = string.Concat(descMedico.TakeWhile((c) => c != '-'));
+            var usuario = (int)Session["UsuarioLogado"];
+            
             var ctx = new ApplicationDbContext();
             var idEspec = (from u in ctx.Especialidades
                        where u.NomeEspecialidade == descEspecialidade
                        select u.IdEspecialidade).FirstOrDefault();
 
             var idMedic = (from u in ctx.Medicos
-                       where u.Nome == descMedico
-                       select u.IdMedico).FirstOrDefault();
+                       where u.CRM.ToString() == CRM
+                           select u.IdMedico).FirstOrDefault();
 
             if (dataAgendamento != null)
             {
                 
             var ctx2 = new ApplicationDbContext();
-            var cons = new Consulta() { idPaciente = 1, idEspecialidade = idEspec, idMedico = idMedic, dataAgendamento = DateTime.Now.ToString("dd/MM/yyyy"), dataConsulta = dataAgendamento, horarioConsulta = horaAgendamento};
+            var cons = new Consulta() { idPaciente = usuario, idEspecialidade = idEspec, idMedico = idMedic, dataAgendamento = DateTime.Now.ToString("dd/MM/yyyy"), dataConsulta = dataAgendamento, horarioConsulta = horaAgendamento};
                 ctx2.Consultas.Add(cons);
                 ctx2.SaveChanges();
             }

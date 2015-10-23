@@ -184,12 +184,31 @@
                     var mdiaAgend = parseInt(diaAgend[1], 10);
                     var ydiaAgend = parseInt(diaAgend[2], 10);
 
-                    if (dhojee < ddiaAgend && mdiaAgend >= mhojee && ydiaAgend >= yhojee) {
-                        //alert('ok');
+                   //if (ddiaAgend > dhojee && mdiaAgend >= mhojee && ydiaAgend >= yhojee) {
+                   //    //alert('ok');
+                   //} else {
+                   //    alert('Data para agendamento inválida!');
+                   //    return false;
+                    //}
+                    if (ydiaAgend >= yhojee) {
+                        if (mdiaAgend >= mhojee) {
+                            if (mdiaAgend >= mhojee && ddiaAgend > dhojee) {
+                                //ok
+                            } else if (mdiaAgend > mhojee) {
+                                //ok
+                            } else {
+                                alert('Data para agendamento inválida!');
+                                return false;
+                            }
+                        } else {
+                            alert('Data para agendamento inválida!');
+                            return false;
+                        }
                     } else {
                         alert('Data para agendamento inválida!');
                         return false;
                     }
+
 
                     $('#myModal').modal('show');
                     
