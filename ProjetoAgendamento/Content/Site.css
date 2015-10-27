@@ -17,3 +17,31 @@
     white-space: normal;
 }
 
+.btn-login{
+	color:#FFFFFF;
+	background-color:#4E91C5;
+	border-color:#4E91C5;
+	float: right;
+}
+
+.btn-login:hover{
+	background-color: #1E90FF;
+	border-color: #87CEEB;
+	color: #FFFFFF;
+}
+
+.loginDown{
+	color: #4E91C5;
+}
+
+.loginDown:hover{
+	color: #4682B4;
+}
+
+#logoazulLogin{
+	text-align: center;
+}
+
+.blocoLogin{
+	margin-top: 20px;
+}

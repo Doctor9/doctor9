@@ -72,8 +72,29 @@ $(function () {
     });
 });
 
+function verificaNumero(e) {
+    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        return false;
+    }
+}
+
+$("#idCartao").keypress(verificaNumero);
 
 /*When clicking on Full hide fail/success boxes */
 $('#name').focus(function () {
     $('#success').html('');
 });
+
+
+$('#esqueceuSenha').click(function showEsqueceuSenha() {
+    $("#blocoAllLogin").hide("slow");
+    $("#blocoAllEsqueceuSenha").show("slow");
+});
+
+$('#login').click(function showLogin() {
+    $("#blocoAllLogin").show("slow");
+    $("#blocoAllEsqueceuSenha").hide("slow");
+});
+
+
+

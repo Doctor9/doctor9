@@ -17,6 +17,7 @@
     <link href="~/Content/grayscale.css" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/Content/3.3.4/calendario.css">
+    <script src="/Content/3.3.4/js/jquery.min.js"></script>
     <style>
         body {
             overflow-x: hidden;
@@ -56,7 +57,7 @@
             <div class="row" style="margin-top:10%;">
                 <div class="col-md-4 col-md-offset-3">
                     <label for="dataMedico">Consultar médico disponível por data:</label>
-                    <input type="date" name="dataMedico" id="dataMedico" class="form-control" />
+                    <input type="text" name="dataMedico" id="dataMedico" class="form-control" />
                 </div>
                 <div class="col-md-6 col-md-offset-3" style="padding-top:28px;">
                     <label for="espec">Especialidade</label>
@@ -156,7 +157,7 @@
             </div>
         </div>
     
-    <script src="/Content/3.3.4/js/jquery.min.js"></script>
+    <!--<script src="/Content/3.3.4/js/jquery.min.js"></script>-->
     <script src="/Content/3.3.4/js/bootstrap.min.js"></script>
     <script src="/Content/3.3.4/js/bootstrap-select.min.js"></script>
     <script src="/Content/3.3.4/js/calendario-plugins.js"></script>
@@ -168,16 +169,14 @@
 
         $(function () {
             $('#espec').change(function () {
-                //alert($('#dataMedico').val());
 
                 var dhoje = $('#dataMedico').val().split('-');
                 var ah = parseInt(dhoje[0], 10);
                 var mh = parseInt(dhoje[1], 10);
                 var dh = parseInt(dhoje[2], 10);
-
                 var datacomp = dh + '/' + mh + '/' + ah
 
-                $.getJSON('/Agendamento/ListaMedico/?Id=' + $('#espec').val() + "&DataDisp=" + datacomp, function (data) {
+                $.getJSON('/Agendamento/ListaMedico/?Id=' + $('#espec').val() + "&DataDisp=" + $('#dataMedico').val(), function (data) {
                     var items = '';
                     items += "<option value='0'>Selecione um médico</option>";
                     $.each(data, function (i, state) {
