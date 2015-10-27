@@ -20,12 +20,25 @@ namespace ProjetoAgendamento.Controllers
             return View();
         }
 
-        public JsonResult ListaMedico(int Id)
+        public JsonResult ListaMedico(int Id, string DataDisp)
         {
-            var state = from s in db.Medicos
-                        where s.idEspecialidade == Id
-                        select s;
-            return Json(new SelectList(state.ToArray(), "idMedico", "ConcatenarCRM"), JsonRequestBehavior.AllowGet);
+            if (DataDisp == "")
+            {
+                var state = from s in db.Medicos
+                            where s.idEspecialidade == Id
+                            select s;
+                return Json(new SelectList(state.ToArray(), "idMedico", "ConcatenarCRM"), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                using (var context = new ApplicationDbContext())
+                {
+                    var state = context.Medicos.SqlQuery("select distinct aa.idmedico,aa.nome,aa.idEspecialidade,aa.CRM from ( select m.*,xx.agenda,yy.consulta from medico m inner join agenda a on a.idmedico = m.IdMedico inner join consulta c on c.idMedico = m.IdMedico left join (select idmedico,count(*) as agenda from agenda where dataconsulta = '" + DataDisp + "' group by idMedico ) xx on xx.idMedico = m.IdMedico left join (select idmedico,count(*) as consulta from Consulta where dataconsulta = '" + DataDisp + "' group by idMedico) yy on yy.idMedico = m.IdMedico where c.dataconsulta = '" + DataDisp + "' and a.horarioConsulta = c.horarioConsulta ) aa where aa.consulta < aa.agenda and aa.idEspecialidade = " + Id);
+                    return Json(new SelectList(state.ToArray(), "idMedico", "ConcatenarCRM"), JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            
         }
 
         public IList<Medico> Getespec(int IdEspecialidade)

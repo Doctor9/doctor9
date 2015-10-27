@@ -17,6 +17,7 @@ namespace ProjetoAgendamento.Models
         public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Tela> Telas { get; set; }
+        public DbSet<Agenda> Agendas { get; set; }
 
         public static ApplicationDbContext Create()
         {
