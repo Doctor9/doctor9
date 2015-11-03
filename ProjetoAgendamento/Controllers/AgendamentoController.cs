@@ -17,7 +17,10 @@ namespace ProjetoAgendamento.Controllers
         {
             ViewBag.idEspecialidade = new SelectList(db.Especialidades, "idEspecialidade", "NomeEspecialidade");
             ViewBag.idMedico = new SelectList(db.Medicos, "idMedico", "ConcatenarCRM");
-            return View();
+            return View(new Models.Agendamento.AgendamentoModel()
+            {
+                Consultas = MinhasConsultas((int)Session["UsuarioLogado"])
+            });
         }
 
         public JsonResult ListaMedico(int Id, string DataDisp)
@@ -141,7 +144,24 @@ namespace ProjetoAgendamento.Controllers
 
             return Json(agenda, JsonRequestBehavior.AllowGet);
         }
+        
+        public Models.Agendamento.ConsultaItem[] MinhasConsultas(int usuario)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
 
+            var mcons = (from con in db.Consultas.Where(con => con.idPaciente == usuario)
+                         from med in db.Medicos.Where(med => med.IdMedico == con.idMedico)
 
+                         select new Models.Agendamento.ConsultaItem()
+                         {
+                             dataConsulta = con.dataConsulta,
+                             horarioConsulta = con.horarioConsulta,
+                             Nome = med.Nome
+                         }).Distinct().OrderBy(con => con.dataConsulta).Take(5)
+                         .ToArray();
+
+            return mcons;
+        }
+        
     }
 }

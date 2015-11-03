@@ -18,5 +18,5 @@ namespace ProjetoAgendamento.Models
         public string dataConsulta { get; set; }
         public string horarioConsulta { get; set; }
     }
-    
+
 }
