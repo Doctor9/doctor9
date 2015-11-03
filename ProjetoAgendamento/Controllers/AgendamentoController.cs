@@ -95,25 +95,52 @@ namespace ProjetoAgendamento.Controllers
                 return RedirectToAction("", "Agendamento");
          }
 
-    
-
-
-
-
 
 
         /*Carregamento*/
-        //public ActionResult Listar()
-        //{
-        //    string datainicio = Request["dtInicio"];
-        //    string horainicio = Request["hrInicio"];
-        //    string tela = Request["tela"];
-        //
-        //
-        //    List<Consulta> agenda = Consulta.Listar(tela, datainicio, horainicio);
-        //
-        //    return Json(agenda, JsonRequestBehavior.AllowGet);
-        //}
+        public ActionResult Listar(int medico)
+        {
+            var ctx = new ApplicationDbContext();
+            var usuario = (int)Session["UsuarioLogado"];
+
+            var q = from c in ctx.Consultas
+                    where c.idMedico == medico
+                    select c;
+
+            var agenda = q.ToList().Select(c =>
+            {
+                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta);
+
+                if (c.idPaciente == usuario)
+                {
+                    return new
+                    {
+                        id = c.IdConsulta,
+                        title = "Consulta",
+                        start = dataConsulta.ToString("yyyy-MM-dd HH:mm:ss"),
+                        end = dataConsulta.AddMinutes(30).ToString("yyyy-MM-dd HH:mm:ss"),
+                        color = "LimeGreen",
+                        allDay = false
+                    };
+                }
+                else
+                {
+                    return new
+                    {
+                        id = c.IdConsulta,
+                        title = "Consulta",
+                        start = dataConsulta.ToString("yyyy-MM-dd HH:mm:ss"),
+                        end = dataConsulta.AddMinutes(30).ToString("yyyy-MM-dd HH:mm:ss"),
+                        color = "DimGray",
+                        allDay = false
+                    };
+
+                }
+            }
+                );
+
+            return Json(agenda, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

@@ -14,9 +14,11 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <div> <img src="~/Content/img/logoazul.png" class="logo" id="logoazul"></div>
+                            <div class="col-md-offset-5">
+                                <img src="~/Content/img/logoazul.png" class="logo" id="logoazul">
+                            </div>
                         </div>
-                        <div class="col-md-10 col-md-offset-1">
+                        <div class="col-md-10 col-md-offset-1" style="padding-top:10px;">
                             <div class="form-group">
                                 <label for="Login">Número do cartão</label>
                                 @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
