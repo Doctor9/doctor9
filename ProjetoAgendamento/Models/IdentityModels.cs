@@ -18,6 +18,7 @@ namespace ProjetoAgendamento.Models
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Tela> Telas { get; set; }
         public DbSet<Agenda> Agendas { get; set; }
+        public DbSet<AgendamentoPolitica> AgendamentoPolitica { get; set; }
 
         public static ApplicationDbContext Create()
         {

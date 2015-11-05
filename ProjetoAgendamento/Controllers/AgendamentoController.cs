@@ -159,7 +159,6 @@ namespace ProjetoAgendamento.Controllers
                              Nome = med.Nome
                          }).Distinct().OrderBy(con => con.dataConsulta).Take(5)
                          .ToArray();
-
             return mcons;
         }
         

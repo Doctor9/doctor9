@@ -175,6 +175,7 @@
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\Agendamento\AgendamentoModel.cs" />
     <Compile Include="Models\Agendamento\ConsultaItem.cs" />
+    <Compile Include="Models\AgendamentoPolitica.cs" />
     <Compile Include="Models\Consulta.cs" />
     <Compile Include="Models\Tela.cs" />
     <Compile Include="Models\Medico.cs" />
