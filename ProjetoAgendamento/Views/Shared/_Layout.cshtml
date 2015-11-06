@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +34,13 @@
                     <li><a href="#quemsomos" class="page-scroll">Quem somos</a></li>
                     <li><a href="#contato" class="page-scroll">Contato</a></li>
                     <li>@Html.ActionLink("Localização", "Index", "Home")</li>
-                    @{ if (HttpContext.Current.User.Identity.IsAuthenticated)
+
+                    @{
+                        if (HttpContext.Current.User.IsInRole("Paciente"))
                         {
                             <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
-                        } }
+                        } 
+                    }
 
                     @Html.Partial("_LoginPartial")
 
@@ -47,8 +52,11 @@
 
 @if (Request.IsAuthenticated)
 {
+    var user = (ClaimsIdentity)User.Identity;
+    var saudacao = user.Claims.First(c => c.Type == "saudacao").Value;
+ 
     <div class="col-md-3 col-md-offset-9" style="height:0px;">
-        <p class="saudacao">Olá @User.Identity.GetUserName()</p>
+        <p class="saudacao">Olá @saudacao</p>
     </div>
 }
 

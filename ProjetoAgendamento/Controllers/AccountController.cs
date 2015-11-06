@@ -25,25 +25,17 @@ namespace ProjetoAgendamento.Controllers
         public ActionResult Login(FormCollection f, string returnUrl)
         {
             var ctx = new ApplicationDbContext();
-            var aaa = Request.Form["login"];
-            var bbb = Request.Form["senha"];
-            var saudacao = "";
-
+            var login = Request.Form["login"];
+            var senha = Request.Form["senha"];
+            
             var usu = (from u in ctx.Usuarios
-                       where u.Login == aaa && u.Senha == bbb
+                       where u.Login == login && u.Senha == senha
                        select u).FirstOrDefault();
             
             if (usu != null)
             {
-                if (usu.Apelido == null)
-                {
-                    saudacao = usu.Nome;
-                }
-                else {
-                    saudacao = usu.Apelido;
-                }
                 Session["UsuarioLogado"] = usu.IdPaciente;
-                FormsAuthentication.SetAuthCookie(saudacao, false);
+                FormsAuthentication.SetAuthCookie(login, false);
                 return RedirectToAction("Index", "");
             }
             else
