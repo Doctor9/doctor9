@@ -25,19 +25,21 @@ namespace ProjetoAgendamento.Controllers
             var q = from c in ctx.Consultas
                     where c.idMedico == idMedico
                     select c;
-
+            
             var agenda = q.ToList().Select(c =>
             {
                 var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta);
+                var paciente = ctx.Usuarios.First(u => u.IdPaciente == c.idPaciente);
 
                 return new
                 {
                     id = c.IdConsulta,
-                    title = "Consulta",
+                    title = paciente.Nome,
                     start = dataConsulta.ToString("yyyy-MM-dd HH:mm:ss"),
                     end = dataConsulta.AddMinutes(30).ToString("yyyy-MM-dd HH:mm:ss"),
                     color = "LimeGreen",
-                    allDay = false
+                    allDay = false,
+                    marcacao = c.dataAgendamento
                 };
             });
 
