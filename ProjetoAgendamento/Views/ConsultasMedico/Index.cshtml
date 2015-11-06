@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Doctor9";
+}
+
+<div class="col-md-12 col-lg-12" style="margin-top:2%;" id="divCalendario">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="tab-content">
+                <div id="calendario"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    
+    <link rel="stylesheet" type="text/css" href="~/Content/3.3.4/calendario.css" />
+
+    <style>
+        #calendario {
+            color: #09406F;
+        }
+    </style>
+
+    <script src="~/Content/3.3.4/js/calendario-plugins.js"></script>
+    <script src="~/Content/3.3.4/js/calendario-pt-br.js"></script>
+
+    <script>
+        $('.saudacao').parent().remove();
+        $('.navbar').addClass('top-nav-collapse');
+        $('#logobranco').show();
+        $('#logoazul').hide();
+
+        $(window).on('scroll', function () {
+            window.setTimeout(function () {
+                $('.navbar').addClass('top-nav-collapse');
+                $('#logobranco').show();
+                $('#logoazul').hide();
+            }, 0);
+        });
+
+        $('#calendario').fullCalendar({
+            header: {
+                left: 'title',
+                right: 'today month,agendaWeek,agendaDay prev,next'
+            },
+            firstDay: 0,
+            timezone: 'America/Sao_Paulo',
+            lang: 'pt-br',
+            eventLimit: true,
+            selectable: true,
+            allDaySlot: false,
+            weekends: true,
+            timeFormat: 'HH:mm',
+            slotLabelInterval: '00:30:00',
+            slotLabelFormat: 'HH:mm',
+            minTime: "08:00:00",
+            maxTime: "20:00:00",
+            slotDuration: "00:30:00",
+            dayClick: function (date, jsEvent, view) {
+                if (view.name == 'month' || view.name == 'agendaWeek') {
+                    $('#calendario').fullCalendar('changeView', 'agendaDay');
+                    $('#calendario').fullCalendar('gotoDate', date);
+                }
+            },
+            eventSources: [{
+                url: '/ConsultasMedico/Consultas',
+                type: 'GET',
+                error: function () {
+                    alert('Ocorreu algum erro ao listar a agenda!');
+                }
+            }],
+            eventClick: function (event) {
+                alert(event.id);
+            }
+        });
+
+    </script>
+
+}

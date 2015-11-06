@@ -38,8 +38,12 @@
                     @{
                         if (HttpContext.Current.User.IsInRole("Paciente"))
                         {
-                            <li>@Html.ActionLink("Agendamento", "", "Agendamento")</li>
-                        } 
+                            <li>@Html.ActionLink("Agendamento", "Index", "Agendamento")</li>
+                        }
+                        else if (HttpContext.Current.User.IsInRole("Medico"))
+                        {
+                            <li>@Html.ActionLink("Meus Agendamentos", "Index", "ConsultasMedico")</li>
+                        }
                     }
 
                     @Html.Partial("_LoginPartial")
@@ -78,7 +82,5 @@
             }
         });
     </script>
-
-
 </body>
 </html>

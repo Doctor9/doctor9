@@ -9,10 +9,11 @@ using Microsoft.AspNet.Identity;
 
 namespace ProjetoAgendamento.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Paciente")]
     public class AgendamentoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             ViewBag.idEspecialidade = new SelectList(db.Especialidades, "idEspecialidade", "NomeEspecialidade");
