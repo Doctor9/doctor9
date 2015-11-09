@@ -29,7 +29,7 @@
 
 <body>
    
-        <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation" id="navnav">
+        <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation" id="navnav" style="height:73px;">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
@@ -83,7 +83,7 @@
                 
                 <div class="row" id="BuscaAgenda" style="display:none;">
                     <div class="col-md-12 col-md-offset-7">
-                        <input type="submit" value="Consultar" class="btn btn-default" onclick="$('#divCalendario').show(); Calendario.init();" />
+                        <input type="submit" id="ConsAgen" value="Consultar" class="btn btn-default" onclick="$('#divCalendario').show(); Calendario.init();" />
                     </div>
                 </div>
 
@@ -176,6 +176,10 @@
                                                     <input type="text" class="form-control text" id="idMedicAgenda" name="idMedicAgenda" readonly />
                                                 </div>
                                             </div>
+                                            <div class="col-md-10">
+                                                <p>Politica de Agendamento</p>
+                                                <ul class="list-group" id="agenpol"></ul>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-5">
@@ -214,7 +218,6 @@
     <script src="/Content/3.3.4/js/calendario-pt-br.js"></script>
     <script src="~/Scripts/jquery.maskedinput.min.js"></script>
     <script src="~/Scripts/maskedinput-binder.js"></script>
-    <!--<script>$(function () { Calendario.init(); });</script>-->
     <script>
         $('#divCalendario').hide();
 
@@ -228,6 +231,22 @@
                     });
                     $('#medic').html(items);
                 });
+            });
+        });
+
+        $('#ConsAgen').click(function () {
+            $.ajax({
+                url: '/Agendamento/ListaPolitica/?Id=' + $('#espec').val(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $("#agenpol").html('');
+                    var divPol = '';
+                    for (var i = 0; i < data.length; i++) {
+                        divPol += '<li class="list-group-item">' + data[i].descricao + '</li>';
+                    }
+                    $("#agenpol").append(divPol);
+                }
             });
         });
     </script>

@@ -45,6 +45,15 @@ namespace ProjetoAgendamento.Controllers
             
         }
 
+        public JsonResult ListaPolitica(int Id)
+        {
+            var pol = from a in db.AgendamentoPolitica
+                        where a.idEspecialidade == Id
+                        select a;
+        
+            return Json(pol.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         public IList<Medico> Getespec(int IdEspecialidade)
         {
             return db.Medicos.Where(m => m.IdMedico == IdEspecialidade).ToList();
