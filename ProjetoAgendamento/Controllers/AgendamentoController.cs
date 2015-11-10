@@ -54,6 +54,28 @@ namespace ProjetoAgendamento.Controllers
             return Json(pol.ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult RemoveConsulta(int Id)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var cons = context.Consultas.FirstOrDefault(u => u.IdConsulta == Id);
+                context.Consultas.Remove(cons);
+                    context.SaveChanges();
+       
+                //var rem = context.Consultas.SqlQuery("delete Consulta where IdConsulta = " + Id);
+                return RedirectToAction("", "Agendamento");
+            }
+        }
+
+        //public ActionResult RemoveConsulta(int Id)
+        //{
+        //    var ctx = new ApplicationDbContext();
+        //    ctx.Consultas.Remove(Id);
+        //    ctx.SaveChanges();
+        //
+        //}
+
+
         public IList<Medico> Getespec(int IdEspecialidade)
         {
             return db.Medicos.Where(m => m.IdMedico == IdEspecialidade).ToList();
@@ -166,7 +188,8 @@ namespace ProjetoAgendamento.Controllers
                          {
                              dataConsulta = con.dataConsulta,
                              horarioConsulta = con.horarioConsulta,
-                             Nome = med.Nome
+                             Nome = med.Nome,
+                             idConsulta = con.IdConsulta
                          }).Distinct().OrderBy(con => con.dataConsulta).Take(5)
                          .ToArray();
             return mcons;
