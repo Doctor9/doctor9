@@ -105,6 +105,7 @@
                                                     <th>Data</th>
                                                     <th>Hora</th>
                                                     <th>Médico</th>
+                                                    <th>Cancelar Consulta</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,6 +115,7 @@
                                                        <td>@item.dataConsulta</td>
                                                        <td>@item.horarioConsulta</td>
                                                        <td>@item.Nome</td>
+                                                       <td><button class="btn btn-warning" type="button" name="desmarc_@item.idConsulta" value="@item.idConsulta">Desmarcar</button></td>
                                                      </tr>
 	                                            }
                                             </tbody>
@@ -240,6 +242,7 @@
             });
         });
 
+        //Listar Politica de Atendimento
         $('#ConsAgen').click(function () {
             $.ajax({
                 url: '/Agendamento/ListaPolitica/?Id=' + $('#espec').val(),
@@ -253,6 +256,21 @@
                     }
                     $("#agenpol").append(divPol);
                 }
+            });
+        });
+
+        //Remover Agendamento de Consulta
+        $("button[name^='desmarc_']").click(function () {
+            valCons = $(this).attr("value");
+            
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("RemoveConsulta", "Agendamento")",
+                data: { id: valCons },
+                success: function () {
+                    window.location = "Agendamento";
+                },
+                ajaxasync: true
             });
         });
     </script>
