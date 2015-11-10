@@ -39,7 +39,8 @@ namespace ProjetoAgendamento.Controllers
                     end = dataConsulta.AddMinutes(30).ToString("yyyy-MM-dd HH:mm:ss"),
                     color = "LimeGreen",
                     allDay = false,
-                    marcacao = c.dataAgendamento
+                    marcacao = c.dataAgendamento,
+                    observacoes = c.observacoes
                 };
             });
 

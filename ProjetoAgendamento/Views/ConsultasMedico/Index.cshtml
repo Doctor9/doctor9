@@ -40,6 +40,12 @@
                                 <input type="text" class="form-control text" id="paciente" readonly />
                             </div>
                         </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="observacoes">Observações</label>
+                                <textarea class="form-control text" id="observacoes" readonly></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,6 +118,7 @@
                 $('#data-consulta').val(event.start.format('DD/MM/YYYY HH:mm'));
                 $('#data-marcacao').val(event.marcacao);
                 $('#paciente').val(event.title);
+                $('#observacoes').val(event.observacoes);
                 $('#modal-consulta').modal('show');
             }
         });

@@ -17,6 +17,8 @@ namespace ProjetoAgendamento.Models
         public string dataAgendamento { get; set; }
         public string dataConsulta { get; set; }
         public string horarioConsulta { get; set; }
+        [MaxLength]
+        public string observacoes { get; set; }
     }
 
 }
