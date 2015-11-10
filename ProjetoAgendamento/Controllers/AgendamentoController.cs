@@ -93,19 +93,29 @@ namespace ProjetoAgendamento.Controllers
                            select u.IdMedico).FirstOrDefault();
 
             if (dataAgendamento != null)
-            {
-                
-            var ctx2 = new ApplicationDbContext();
-            var cons = new Consulta() { idPaciente = usuario, idEspecialidade = idEspec, idMedico = idMedic, dataAgendamento = DateTime.Now.ToString("dd/MM/yyyy"), dataConsulta = dataAgendamento, horarioConsulta = horaAgendamento};
+            {    
+                var ctx2 = new ApplicationDbContext();
+                var cons = new Consulta()
+                {
+                    idPaciente = usuario,
+                    idEspecialidade = idEspec,
+                    idMedico = idMedic,
+                    dataAgendamento = DateTime.Now.ToString("dd/MM/yyyy"),
+                    dataConsulta = dataAgendamento,
+                    horarioConsulta = horaAgendamento,
+                    observacoes = Request.Form["observacoes"]
+                };
+
                 ctx2.Consultas.Add(cons);
                 ctx2.SaveChanges();
+
+                return RedirectToAction("", "Agendamento");
             }
             else
             {
                 ModelState.AddModelError("Senha", "Usuário ou senha inválido");
                 return View();
             }
-                return RedirectToAction("", "Agendamento");
          }
 
 
