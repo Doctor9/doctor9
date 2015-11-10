@@ -62,19 +62,9 @@ namespace ProjetoAgendamento.Controllers
                 context.Consultas.Remove(cons);
                     context.SaveChanges();
        
-                //var rem = context.Consultas.SqlQuery("delete Consulta where IdConsulta = " + Id);
                 return RedirectToAction("", "Agendamento");
             }
         }
-
-        //public ActionResult RemoveConsulta(int Id)
-        //{
-        //    var ctx = new ApplicationDbContext();
-        //    ctx.Consultas.Remove(Id);
-        //    ctx.SaveChanges();
-        //
-        //}
-
 
         public IList<Medico> Getespec(int IdEspecialidade)
         {
