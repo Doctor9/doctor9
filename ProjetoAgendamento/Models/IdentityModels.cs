@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using ProjetoAgendamento.Migrations;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ProjetoAgendamento.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public DbSet<Usuario> Usuarios { get; set; }

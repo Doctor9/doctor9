@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201511102341369_Especialidade.Designer.cs">
       <DependentUpon>201511102341369_Especialidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511102348584_Medico.cs" />
+    <Compile Include="Migrations\201511102348584_Medico.Designer.cs">
+      <DependentUpon>201511102348584_Medico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Agenda.cs" />
@@ -339,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511102341369_Especialidade.resx">
       <DependentUpon>201511102341369_Especialidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511102348584_Medico.resx">
+      <DependentUpon>201511102348584_Medico.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
