@@ -9,4 +9,11 @@ namespace ProjetoAgendamento.Models.Agendamento
     {
         public ConsultaItem[] Consultas { get; set; }
     }
+
+    public class Observacoes
+    {
+        public int Id { get; set; }
+        public string Obs { get; set; }
+    }
+
 }

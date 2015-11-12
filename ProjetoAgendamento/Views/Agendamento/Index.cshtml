@@ -90,32 +90,34 @@
 
                 <!-- Modal Minhas Consultas -->
                 <div class="modal fade" id="ModalConsulta" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
 
-                        <div class="modal-content">
+                        <div class="modal-content modal-lg">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Minhas Consultas</h4>
                             </div>
                                 <div class="modal-body">
                                     <div class="row form-group">
-                                        <table class="table">
+                                        <table class="table" id="minhas-consultas">
                                             <thead>
                                                 <tr>
                                                     <th>Data</th>
                                                     <th>Hora</th>
                                                     <th>Médico</th>
+                                                    <th>Observação</th>
                                                     <th>Cancelar Consulta</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in Model.Consultas)
                                                 {
-		                                             <tr>
+		                                             <tr data-id="@item.idConsulta">
                                                        <td>@item.dataConsulta</td>
                                                        <td>@item.horarioConsulta</td>
-                                                       <td>@item.Nome</td>
-                                                       <td><button class="btn btn-warning" type="button" name="desmarc_@item.idConsulta" value="@item.idConsulta">Desmarcar</button></td>
+                                                       <td>@item.nome</td>
+                                                       <td><input type="text" value="@item.observacoes" class="obs form-control"/></td>
+                                                       <td><button class="btn btn-warning btn-sm" type="button" name="desmarc_@item.idConsulta" value="@item.idConsulta">Desmarcar</button></td>
                                                      </tr>
 	                                            }
                                             </tbody>
@@ -124,6 +126,7 @@
                                 </div>
                             
                             <div class="modal-footer">
+                                <button type="button" name="salvAlteracoes" class="btn btn-success" data-dismiss="modal">Salvar Alterações</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                             </div>
 
@@ -262,7 +265,7 @@
         //Remover Agendamento de Consulta
         $("button[name^='desmarc_']").click(function () {
             valCons = $(this).attr("value");
-            
+
             $.ajax({
                 type: "post",
                 url: "@Url.Action("RemoveConsulta", "Agendamento")",
@@ -273,6 +276,34 @@
                 ajaxasync: true
             });
         });
+
+        $("button[name^='salvAlteracoes']").click(function () {
+            var lista = [];
+
+            $('#minhas-consultas tbody tr').each(function (_, e) {
+                var tr = $(e);
+                var obs = tr.find('.obs').val();
+                var item = {
+                    id: parseInt(tr.data('id')),
+                    obs: obs
+                };
+
+                lista.push(item);
+            });
+            //alert(JSON.stringify(lista));
+            lista = JSON.stringify({ 'lista': lista });
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Agendamento/ListaObservacoes',
+                data: lista
+            });
+
+
+        });
+
     </script>
 
 </body>

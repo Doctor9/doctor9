@@ -9,7 +9,8 @@ namespace ProjetoAgendamento.Models.Agendamento
     {
         public string dataConsulta { get; set; }
         public string horarioConsulta { get; set; }
-        public string Nome { get; set; }
+        public string nome { get; set; }
+        public string observacoes { get; set; }
         public int idConsulta { get; set; }
     }
 

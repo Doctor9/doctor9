@@ -130,8 +130,20 @@ namespace ProjetoAgendamento.Controllers
             }
          }
 
+        //Salvar Alteração de Observações
+        public void ListaObservacoes(List<Models.Agendamento.Observacoes> lista)
+        {
 
+            ApplicationDbContext db = new ApplicationDbContext();
 
+            foreach (var observacoes in lista)
+            {
+                var user = db.Consultas.Single(u => u.IdConsulta == observacoes.Id);
+                user.observacoes = observacoes.Obs;
+                db.SaveChanges();
+            }
+        }
+        
         /*Carregamento*/
         public ActionResult Listar(int medico)
         {
@@ -188,7 +200,8 @@ namespace ProjetoAgendamento.Controllers
                          {
                              dataConsulta = con.dataConsulta,
                              horarioConsulta = con.horarioConsulta,
-                             Nome = med.Nome,
+                             nome = med.Nome,
+                             observacoes = con.observacoes,
                              idConsulta = con.IdConsulta
                          }).Distinct().OrderBy(con => con.dataConsulta).Take(5)
                          .ToArray();
