@@ -29,7 +29,7 @@ namespace ProjetoAgendamento.Controllers
             
             var agenda = q.ToList().Select(c =>
             {
-                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta, , new CultureInfo("pt-BR"));
+                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta, new CultureInfo("pt-BR"));
                 var paciente = ctx.Usuarios.First(u => u.IdPaciente == c.idPaciente);
 
                 return new
