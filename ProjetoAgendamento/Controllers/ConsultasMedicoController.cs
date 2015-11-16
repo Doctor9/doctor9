@@ -1,6 +1,7 @@
 ﻿using ProjetoAgendamento.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -28,7 +29,7 @@ namespace ProjetoAgendamento.Controllers
             
             var agenda = q.ToList().Select(c =>
             {
-                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta);
+                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta, , new CultureInfo("pt-BR"));
                 var paciente = ctx.Usuarios.First(u => u.IdPaciente == c.idPaciente);
 
                 return new

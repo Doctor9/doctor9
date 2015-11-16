@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ProjetoAgendamento.Models;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace ProjetoAgendamento.Controllers
 {
@@ -156,7 +157,7 @@ namespace ProjetoAgendamento.Controllers
 
             var agenda = q.ToList().Select(c =>
             {
-                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta);
+                var dataConsulta = DateTime.Parse(c.dataConsulta + " " + c.horarioConsulta, new CultureInfo("pt-BR"));
 
                 if (c.idPaciente == usuario)
                 {
