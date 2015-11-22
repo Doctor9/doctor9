@@ -44,6 +44,10 @@
                         {
                             <li>@Html.ActionLink("Meus Agendamentos", "Index", "ConsultasMedico")</li>
                         }
+                        else if (HttpContext.Current.User.IsInRole("Secretaria"))
+                        {
+                            <li>@Html.ActionLink("Médicos", "Index", "Medicos")</li>
+                        }
                     }
 
                     @Html.Partial("_LoginPartial")

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjetoAgendamento.Models.Medico>
+
+@{
+    ViewBag.Title = "Medicos";
+}
+
+<div class="container" style="color: #333; margin-top: 20px;">
+    <h2 class="navbar-left">Médicos</h2>
+    @Html.ActionLink("Incluir", "Incluir", "Medicos", new { @class = "btn btn-primary navbar-right" })
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CRM</th>
+                <th>Nome</th>
+                <th>Especialidade</th>
+                <th width="90"></th>
+                <th width="90"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.CRM</td>
+                    <td>@m.Nome</td>
+                    <td>@m.Especialidade.Descricao</td>
+                    <td>@Html.ActionLink("Editar", "Editar", "Medicos", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })</td>
+                    <td>@Html.ActionLink("Excluir", "Excluir", "Medicos", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-danger" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $('.saudacao').parent().remove();
+        $('.navbar').addClass('top-nav-collapse');
+        $('#logobranco').show();
+        $('#logoazul').hide();
+
+        $(window).on('scroll', function () {
+            window.setTimeout(function () {
+                $('.navbar').addClass('top-nav-collapse');
+                $('#logobranco').show();
+                $('#logoazul').hide();
+            }, 0);
+        });
+    </script>
+}

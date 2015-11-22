@@ -169,6 +169,7 @@
     <Compile Include="Controllers\AgendamentoController.cs" />
     <Compile Include="Controllers\ConsultasMedicoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MedicosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -336,6 +337,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Agendamento\Index.cshtml" />
     <Content Include="Views\ConsultasMedico\Index.cshtml" />
+    <Content Include="Views\Medicos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
