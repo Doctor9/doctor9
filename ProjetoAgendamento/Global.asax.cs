@@ -45,14 +45,18 @@ namespace ProjetoAgendamento
                     claimsIdentity.AddClaim(new Claim("saudacao", usuario.Nome));
                 }
 
-                if (usuario.IdMedico != null)
+                switch (usuario.Tipo)
                 {
-                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Medico"));
-                    claimsIdentity.AddClaim(new Claim("IdMedico", usuario.IdMedico.ToString()));
-                }
-                else
-                {
-                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Paciente"));
+                    case Usuario.TipoUsuario.Paciente:
+                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Paciente"));
+                        break;
+                    case Usuario.TipoUsuario.Medico:
+                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Medico"));
+                        claimsIdentity.AddClaim(new Claim("IdMedico", usuario.IdMedico.ToString()));
+                        break;
+                    case Usuario.TipoUsuario.Secretaria:
+                        claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Secretaria"));
+                        break;
                 }
                 
                 HttpContext.Current.User = new ClaimsPrincipal(claimsIdentity);

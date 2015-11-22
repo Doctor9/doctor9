@@ -184,6 +184,14 @@
     <Compile Include="Migrations\201511102348584_Medico.Designer.cs">
       <DependentUpon>201511102348584_Medico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511221405318_Secretaria.cs" />
+    <Compile Include="Migrations\201511221405318_Secretaria.Designer.cs">
+      <DependentUpon>201511221405318_Secretaria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511221408078_CorrigirUsuarios.cs" />
+    <Compile Include="Migrations\201511221408078_CorrigirUsuarios.Designer.cs">
+      <DependentUpon>201511221408078_CorrigirUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Agenda.cs" />
@@ -346,6 +354,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511102348584_Medico.resx">
       <DependentUpon>201511102348584_Medico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511221405318_Secretaria.resx">
+      <DependentUpon>201511221405318_Secretaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511221408078_CorrigirUsuarios.resx">
+      <DependentUpon>201511221408078_CorrigirUsuarios.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

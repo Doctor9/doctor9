@@ -13,11 +13,17 @@ namespace ProjetoAgendamento.Models
         public int IdPaciente { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-        public int CodVinculo { get; set; }
         public string Nome { get; set; }
         public string Apelido { get; set; }
-
+        public TipoUsuario Tipo { get; set; }
         public int? IdMedico { get; set; }
         public Medico Medico { get; set; }
+
+        public enum TipoUsuario
+        {
+            Paciente,
+            Medico,
+            Secretaria
+        }
     }
 }
