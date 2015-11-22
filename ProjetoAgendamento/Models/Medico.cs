@@ -13,11 +13,11 @@ namespace ProjetoAgendamento.Models
         public int IdMedico { get; set; }
 
         [Display(Name = "CRM")]
-        [Required]
+        [Required(ErrorMessage = "O campo CRM é obrigatório.")]
         public int CRM { get; set; }
 
         [Display(Name = "Nome Completo")]
-        [Required]
+        [Required(ErrorMessage = "O campo Nome Completo é obrigatório.")]
         public string Nome { get; set; }
 
         [Display(Name = "Especialidade")]
@@ -37,7 +37,7 @@ namespace ProjetoAgendamento.Models
         public string Telefone { get; set; }
 
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Preencha um email válido.")]
         public string Email { get; set; }
         
         [Display(Name = "Observações")]
