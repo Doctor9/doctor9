@@ -45,3 +45,7 @@
 .blocoLogin{
 	margin-top: 20px;
 }
+
+.ui-datepicker {
+    width: 18em !important;
+}

@@ -22,6 +22,7 @@ namespace ProjetoAgendamento
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+            DefaultModelBinder.ResourceClassKey = "Messages";
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

@@ -46,7 +46,7 @@
                         }
                         else if (HttpContext.Current.User.IsInRole("Secretaria"))
                         {
-                            <li>@Html.ActionLink("Médicos", "Index", "Medicos")</li>
+                            <li>@Html.ActionLink("Gerenciar Médicos", "Index", "Medicos")</li>
                         }
                     }
 
@@ -73,6 +73,33 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        $.datepicker.regional['pt-BR'] = {
+            closeText: 'Fechar',
+            prevText: '&#x3c;Anterior',
+            nextText: 'Pr&oacute;ximo&#x3e;',
+            currentText: 'Hoje',
+            monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho', 'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+            dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','S&aacute;bado'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
+            dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+
+        $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+
+        $("span.field-validation-valid, span.field-validation-error").addClass('help-block');
+        $("div.form-group").has("span.field-validation-error").addClass('has-error');
+        $("div.validation-summary-errors").has("li:visible").addClass("alert alert-block alert-danger");
+    </script>
+
     @RenderSection("scripts", required: false)
 
     <script>

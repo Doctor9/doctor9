@@ -1,12 +1,20 @@
-﻿@model IEnumerable<ProjetoAgendamento.Models.Medico>
+﻿@model IEnumerable<Medico>
 
 @{
     ViewBag.Title = "Medicos";
 }
 
 <div class="container" style="color: #333; margin-top: 20px;">
+    @if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> @ViewBag.Msg
+        </div>
+    }
+    
     <h2 class="navbar-left">Médicos</h2>
-    @Html.ActionLink("Incluir", "Incluir", "Medicos", new { @class = "btn btn-primary navbar-right" })
+    @Html.ActionLink("Incluir", "Incluir", null, new { @class = "btn btn-primary navbar-right" })
 
     <table class="table">
         <thead>
@@ -15,18 +23,16 @@
                 <th>Nome</th>
                 <th>Especialidade</th>
                 <th width="90"></th>
-                <th width="90"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var m in Model)
             {
-                <tr>
+                <tr class="@(m.Ativo ? "" : "desativado")">
                     <td>@m.CRM</td>
                     <td>@m.Nome</td>
                     <td>@m.Especialidade.Descricao</td>
-                    <td>@Html.ActionLink("Editar", "Editar", "Medicos", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })</td>
-                    <td>@Html.ActionLink("Excluir", "Excluir", "Medicos", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-danger" })</td>
+                    <td>@Html.ActionLink("Editar", "Editar", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })</td>
                 </tr>
             }
         </tbody>
@@ -48,4 +54,10 @@
             }, 0);
         });
     </script>
+
+    <style>
+        .desativado {
+            text-decoration: line-through;
+        }
+    </style>
 }

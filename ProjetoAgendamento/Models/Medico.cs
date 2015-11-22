@@ -11,10 +11,39 @@ namespace ProjetoAgendamento.Models
     {
         [Key]
         public int IdMedico { get; set; }
-        public string Nome { get; set; }
-        public int idEspecialidade { get; set; }
+
+        [Display(Name = "CRM")]
+        [Required]
         public int CRM { get; set; }
+
+        [Display(Name = "Nome Completo")]
+        [Required]
+        public string Nome { get; set; }
+
+        [Display(Name = "Especialidade")]
+        public int idEspecialidade { get; set; }
         public virtual Especialidade Especialidade { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        public DateTime? DataNascimento { get; set; }
+
+        [Display(Name = "Sexo")]
+        public bool? SexoMasculino { get; set; }
+
+        [Display(Name = "Disponibilidade")]
+        public DateTime? Disponibilidade { get; set; }
+
+        [Display(Name = "Telefone de Contato")]
+        public string Telefone { get; set; }
+
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+        
+        [Display(Name = "Observações")]
+        public string Observacoes { get; set; }
+
+        public bool Ativo { get; set; }
 
         public string ConcatenarCRM
         {

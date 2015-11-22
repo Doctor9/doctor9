@@ -9,7 +9,8 @@ namespace ProjetoAgendamento
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -31,6 +32,7 @@ namespace ProjetoAgendamento
                       "~/Content/grayscale.css",
                       "~/Content/contato.css",
                       "~/Content/font-awesome/fcss/font-awesome.min.css",
+                      "~/Content/themes/base/jquery.ui.all.css",
                       "~/Content/site.css"));
         }
     }

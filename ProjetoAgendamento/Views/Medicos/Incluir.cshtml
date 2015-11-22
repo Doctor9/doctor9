@@ -1,0 +1,121 @@
+﻿@model Medico
+
+@{
+    ViewBag.Title = "Incluir Médico";
+
+    var ctx = new ApplicationDbContext();
+    var listaEspecialidades = ctx.Especialidades
+        .ToList()
+        .Select(e => new SelectListItem() { Text = e.Descricao, Value = e.IdEspecialidade.ToString() });
+}
+
+<div class="container" style="color: #333; margin-top: 20px;">
+    <h2>Incluir Médico</h2>
+
+    @using (Html.BeginForm("Incluir", "Medicos", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.CRM, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-2">
+                @Html.TextBoxFor(m => m.CRM, new { @class = "form-control", @maxLength = 10 })
+            </div>
+            @Html.ValidationMessageFor(m => m.CRM)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-6">
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @maxLength = 100 })
+            </div>
+            @Html.ValidationMessageFor(m => m.Nome)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.idEspecialidade, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.idEspecialidade, listaEspecialidades, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(m => m.idEspecialidade)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DataNascimento, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.DataNascimento, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(m => m.DataNascimento)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.SexoMasculino, new { @class = "col-sm-2 control-label" })
+            <div class="checkbox-inline">
+                <label>
+                    @Html.RadioButtonFor(m => m.SexoMasculino, true) Masculino
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.SexoMasculino, false) Feminino
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Disponibilidade, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Disponibilidade, new { @class = "form-control" })
+            </div>
+            @Html.ValidationMessageFor(m => m.Disponibilidade)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Telefone, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", @maxLength = 20 })
+            </div>
+            @Html.ValidationMessageFor(m => m.Telefone)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxLength = 100 })
+            </div>
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Observacoes, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-6">
+                @Html.TextBoxFor(m => m.Observacoes, new { @class = "form-control", @maxLength = 100 })
+            </div>
+            @Html.ValidationMessageFor(m => m.Observacoes)
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Incluir</button>
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $('.saudacao').parent().remove();
+        $('.navbar').addClass('top-nav-collapse');
+        $('#logobranco').show();
+        $('#logoazul').hide();
+
+        $(window).on('scroll', function () {
+            window.setTimeout(function () {
+                $('.navbar').addClass('top-nav-collapse');
+                $('#logobranco').show();
+                $('#logoazul').hide();
+            }, 0);
+        });
+
+        $('#@Html.IdFor(m => m.DataNascimento)').datepicker();
+        $('#@Html.IdFor(m => m.Disponibilidade)').datepicker();
+
+    </script>
+}
