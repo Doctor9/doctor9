@@ -32,7 +32,12 @@
                     <td>@m.CRM</td>
                     <td>@m.Nome</td>
                     <td>@m.Especialidade.Descricao</td>
-                    <td>@Html.ActionLink("Editar", "Editar", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })</td>
+                    <td>
+                        @if (m.Ativo)
+                        {
+                            @Html.ActionLink("Editar", "Editar", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
