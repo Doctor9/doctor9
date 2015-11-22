@@ -19,6 +19,7 @@ namespace ProjetoAgendamento.Controllers
         {
             ViewBag.idEspecialidade = new SelectList(db.Especialidades, "idEspecialidade", "NomeEspecialidade");
             ViewBag.idMedico = new SelectList(db.Medicos, "idMedico", "ConcatenarCRM");
+
             return View(new Models.Agendamento.AgendamentoModel()
             {
                 Consultas = MinhasConsultas((int)Session["UsuarioLogado"])
@@ -30,7 +31,7 @@ namespace ProjetoAgendamento.Controllers
             if (DataDisp == "")
             {
                 var state = from s in db.Medicos
-                            where s.idEspecialidade == Id
+                            where s.idEspecialidade == Id && s.Ativo == true
                             select s;
                 return Json(new SelectList(state.ToArray(), "idMedico", "ConcatenarCRM"), JsonRequestBehavior.AllowGet);
             }

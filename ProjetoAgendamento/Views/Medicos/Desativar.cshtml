@@ -1,0 +1,47 @@
+﻿@model Medico
+
+@{
+    ViewBag.Title = "Desativar Médico";
+}
+
+<div class="container" style="color: #333; margin-top: 20px;">
+    <h2>Desativar Médico</h2>
+
+    @using (Html.BeginForm("Desativar", "Medicos", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(m => m.IdMedico)
+
+        @Html.ValidationSummary(true)
+
+        <p>
+            Você está desativando o médico <b>@Model.Nome</b>.
+        </p>
+        <p>
+            Este processo é irreversível. Deseja continuar?
+        </p>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $('.saudacao').parent().remove();
+        $('.navbar').addClass('top-nav-collapse');
+        $('#logobranco').show();
+        $('#logoazul').hide();
+
+        $(window).on('scroll', function () {
+            window.setTimeout(function () {
+                $('.navbar').addClass('top-nav-collapse');
+                $('#logobranco').show();
+                $('#logoazul').hide();
+            }, 0);
+        });
+    </script>
+}

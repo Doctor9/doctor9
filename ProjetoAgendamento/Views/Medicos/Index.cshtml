@@ -9,7 +9,7 @@
     {
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> @ViewBag.Msg
+            @ViewBag.Msg
         </div>
     }
     
@@ -23,6 +23,7 @@
                 <th>Nome</th>
                 <th>Especialidade</th>
                 <th width="90"></th>
+                <th width="100"></th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,12 @@
                         @if (m.Ativo)
                         {
                             @Html.ActionLink("Editar", "Editar", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-primary" })
+                        }
+                    </td>
+                    <td>
+                        @if (m.Ativo)
+                        {
+                            @Html.ActionLink("Desativar", "Desativar", new { id = m.IdMedico }, new { @class = "btn btn-sm btn-danger" })
                         }
                     </td>
                 </tr>
