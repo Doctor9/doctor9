@@ -6,7 +6,7 @@
     var ctx = new ApplicationDbContext();
     var listaEspecialidades = ctx.Especialidades
         .ToList()
-        .Select(e => new SelectListItem() { Text = e.Descricao, Value = e.IdEspecialidade.ToString() });
+        .Select(e => new SelectListItem() { Text = e.NomeEspecialidade, Value = e.IdEspecialidade.ToString() });
 }
 
 <div class="container" style="color: #333; margin-top: 20px;">
