@@ -88,7 +88,7 @@ namespace ProjetoAgendamento.Controllers
             
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(medico);
             }
 
             var medicoExistente = ctx.Medicos.Find(medico.IdMedico);
