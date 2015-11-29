@@ -120,8 +120,21 @@ namespace ProjetoAgendamento.Controllers
                     observacoes = Request.Form["observacoes"]
                 };
 
-                ctx2.Consultas.Add(cons);
-                ctx2.SaveChanges();
+                var validConsulta = (from u in ctx.Consultas
+                               where u.dataConsulta == dataAgendamento
+                               && u.horarioConsulta == horaAgendamento
+                               && u.idPaciente == usuario
+                                     select u.IdConsulta).Count();
+                if (validConsulta > 0)
+                {
+                    //fazer tela de erro
+                    return RedirectToAction("", "Agendamento");
+                }
+                else
+                {
+                    ctx2.Consultas.Add(cons);
+                    ctx2.SaveChanges();
+                }
 
                 return RedirectToAction("", "Agendamento");
             }
