@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ProjetoAgendamento.Models;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
 using System.Globalization;
+using System.Web.UI;
 
 namespace ProjetoAgendamento.Controllers
 {
-    [Authorize(Roles="Paciente")]
+    [Authorize(Roles="Paciente, Secretaria")]
     public class AgendamentoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -55,6 +53,16 @@ namespace ProjetoAgendamento.Controllers
         
             return Json(pol.ToList(), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ListaDadosConsulta(int IdConsulta)
+        {
+            var con = from c in db.Consultas
+                      where c.IdConsulta == IdConsulta
+                      select c;
+
+            return Json(con.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult RemoveConsulta(int Id)
         {
@@ -129,6 +137,7 @@ namespace ProjetoAgendamento.Controllers
                 {
                     //fazer tela de erro
                     return RedirectToAction("", "Agendamento");
+
                 }
                 else
                 {
@@ -144,6 +153,7 @@ namespace ProjetoAgendamento.Controllers
                 return View();
             }
          }
+
 
         //Salvar Alteração de Observações
         public void ListaObservacoes(List<Models.Agendamento.Observacoes> lista)
@@ -210,15 +220,16 @@ namespace ProjetoAgendamento.Controllers
 
             var mcons = (from con in db.Consultas.Where(con => con.idPaciente == usuario)
                          from med in db.Medicos.Where(med => med.IdMedico == con.idMedico)
+                         //where DateTime.Parse(con.dataConsulta) >= DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"))
 
-                         select new Models.Agendamento.ConsultaItem()
+            select new Models.Agendamento.ConsultaItem()
                          {
                              dataConsulta = con.dataConsulta,
                              horarioConsulta = con.horarioConsulta,
                              nome = med.Nome,
                              observacoes = con.observacoes,
                              idConsulta = con.IdConsulta
-                         }).Distinct().OrderBy(con => con.dataConsulta).Take(5)
+                         }).Distinct().OrderBy(con => con.dataConsulta)
                          .ToArray();
             return mcons;
         }

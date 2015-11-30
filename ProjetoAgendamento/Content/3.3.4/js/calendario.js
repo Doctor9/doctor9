@@ -29,6 +29,33 @@
             minTime: "08:00:00",
             maxTime: "20:00:00",
             slotDuration: "00:30:00",
+
+            
+            eventClick: function (calEvent, jsEvent, view) {
+                
+                //alert('idcons: ' + calEvent.id);
+                //AgendamentoController.ListaDadosConsulta
+                //http://fullcalendar.io/docs/event_data/Event_Object/
+
+                $('#myModalSecretaria').modal('show');
+
+                var especialidadeSec = $('#espec option:selected').text();
+                var medicoSec = $('#medic option:selected').text();
+                var consulta = calEvent.id;
+                
+                var valorProInputSec = {
+                    'idConsulta': consulta,
+                    'idEspecAgendaSec': especialidadeSec,
+                    'idMedicAgendaSec': medicoSec
+                };
+                $('#dadosAgendamentoSecretaria').find('input').val(function (index, value) {
+                    return valorProInputSec[this.id];
+                });
+
+            },
+
+
+
             eventSources: [{
                 url: '/Agendamento/Listar',
                 type: 'GET',

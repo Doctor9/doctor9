@@ -47,6 +47,7 @@
                         else if (HttpContext.Current.User.IsInRole("Secretaria"))
                         {
                             <li>@Html.ActionLink("Gerenciar Médicos", "Index", "Medicos")</li>
+                            <li>@Html.ActionLink("Agendamentos", "Index", "Agendamento")</li>
                         }
                     }
 

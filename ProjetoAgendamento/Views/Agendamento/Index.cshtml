@@ -207,7 +207,80 @@
                         </div>
 
                     </div>
-                </div>               
+                </div>          
+                
+                
+                
+                <!-- Modal Secretaria -->
+                <div class="modal fade" id="myModalSecretaria" role="dialog">
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="modal-title">Agendar horário</h5>
+                            </div>
+                            @using (Html.BeginForm("AgendamentoConsulta", "Agendamento", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "dadosAgendamentoSecretaria" }))
+                            {
+                                <div class="modal-body">
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <input type="hidden" id="idConsulta" name="idConsulta" value=""/>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="paciente">Paciente</label>
+                                                    <input type="text" class="form-control text" id="paciente" name="paciente" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="diaAgendaSec">Data Agendamento</label>
+                                                    <input type="text" class="form-control text" id="diaAgendaSec" name="diaAgendaSec" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="hrAgendaSec">Hora Agendamento</label>
+                                                    <input type="text" class="form-control text" id="hrAgendaSec" name="hrAgendaSec" value="" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="idEspecAgendaSec">Especialidade</label>
+                                                    <input type="text" class="form-control text" id="idEspecAgendaSec" name="idEspecAgendaSec" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="idMedicAgendaSec">Médico</label>
+                                                    <input type="text" class="form-control text" id="idMedicAgendaSec" name="idMedicAgendaSec" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <label for="observacoesSec">Observações</label>
+                                                    <textarea class="form-control text" id="observacoesSec" name="observacoesSec"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-md-offset-5">
+                                                <button type="button" id="desConsulta" value="Desmarcar" class="btn btn-danger">Desmarcar</button>
+                                                <button type="submit" value="Entrar" class="btn btn-success">Salvar Agendamento</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>                  
                                 
                 <div class="col-md-12 col-lg-12" style="margin-top:2%;" id="divCalendario">
                     <div class="panel panel-default">
@@ -274,6 +347,19 @@
                     window.location = "Agendamento";
                 },
                 ajaxasync: true
+            });
+        });
+
+        $("#desConsulta").click(function () {
+            valCons2 = $('#idConsulta').attr("value");
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("RemoveConsulta", "Agendamento")",
+                data: { id: valCons2 },
+            success: function () {
+                window.location = "Agendamento";
+            },
+            ajaxasync: true
             });
         });
 
