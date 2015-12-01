@@ -37,7 +37,11 @@
                 //AgendamentoController.ListaDadosConsulta
                 //http://fullcalendar.io/docs/event_data/Event_Object/
 
-                $('#myModalSecretaria').modal('show');
+                var role = $('#myModalSecretaria').attr('rel-role');
+
+                if (role == "Secretaria") {
+                    $('#myModalSecretaria').modal('show');
+                }
 
                 var especialidadeSec = $('#espec option:selected').text();
                 var medicoSec = $('#medic option:selected').text();

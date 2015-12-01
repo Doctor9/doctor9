@@ -18,6 +18,15 @@ namespace ProjetoAgendamento.Controllers
             ViewBag.idEspecialidade = new SelectList(db.Especialidades, "idEspecialidade", "NomeEspecialidade");
             ViewBag.idMedico = new SelectList(db.Medicos, "idMedico", "ConcatenarCRM");
 
+            if (User.IsInRole("Secretaria"))
+            {
+                ViewBag.Role = "Secretaria";
+            }
+            else if (User.IsInRole("Paciente"))
+            {
+                ViewBag.Role = "Paciente";
+            }
+
             return View(new Models.Agendamento.AgendamentoModel()
             {
                 Consultas = MinhasConsultas((int)Session["UsuarioLogado"])
