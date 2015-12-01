@@ -220,9 +220,9 @@ namespace ProjetoAgendamento.Controllers
 
             var mcons = (from con in db.Consultas.Where(con => con.idPaciente == usuario)
                          from med in db.Medicos.Where(med => med.IdMedico == con.idMedico)
-                         //where DateTime.Parse(con.dataConsulta) >= DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"))
+                             //where DateTime.Parse(con.dataConsulta) >= DateTime.Parse(DateTime.Now.ToString("dd/MM/yyyy"))
 
-            select new Models.Agendamento.ConsultaItem()
+                         select new Models.Agendamento.ConsultaItem()
                          {
                              dataConsulta = con.dataConsulta,
                              horarioConsulta = con.horarioConsulta,
